@@ -4,46 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detected malware in macOS - Apple Support</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="https://www.apple.com/favicon.ico">
     <style>
-        /* Ensuring the highlight looks like a native macOS selection */
-        .command-text::selection {
-            background-color: #007aff;
-            color: white;
+        :root {
+            --apple-text-color: #1d1d1f;
+            --apple-bg-color: #ffffff;
+            --apple-secondary-bg: #f5f5f7;
+            --apple-border-color: #d2d2d7;
+            --terminal-bg: #2d2d2d;
+            --terminal-header: #3d3d3d;
+            --mac-selection: #007aff;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; color: var(--apple-text-color); background-color: var(--apple-bg-color); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+        header { background-color: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--apple-border-color); position: sticky; top: 0; z-index: 1000; }
+        .header-content { max-width: 980px; margin: 0 auto; height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; }
+        .apple-logo { font-size: 20px; text-decoration: none; color: var(--apple-text-color); }
+        nav a { text-decoration: none; color: var(--apple-text-color); font-size: 12px; margin-left: 30px; opacity: 0.8; }
+        main { max-width: 980px; margin: 0 auto; padding: 40px 22px; }
+        .breadcrumb { font-size: 12px; color: #6e6e73; margin-bottom: 40px; }
+        article h1 { font-size: 40px; font-weight: 600; letter-spacing: -0.011em; margin-bottom: 24px; }
+        .intro { font-size: 21px; font-weight: 400; margin-bottom: 40px; }
+        .maintenance-box { margin: 60px 0; padding: 30px; background-color: var(--apple-secondary-bg); border-radius: 18px; }
+        .terminal-container { background-color: var(--terminal-bg); border-radius: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); overflow: hidden; margin-top: 24px; }
+        .terminal-header { background-color: var(--terminal-header); height: 38px; display: flex; align-items: center; padding: 0 16px; position: relative; }
+        .dots { display: flex; gap: 8px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background-color: #ff5f56; }
+        .yellow { background-color: #ffbd2e; }
+        .green { background-color: #27c93f; }
+        .terminal-title { color: #d2d2d7; font-size: 13px; position: absolute; left: 50%; transform: translateX(-50%); font-family: monospace; }
+        #copy-btn { margin-left: auto; background-color: #0071e3; color: white; border: none; padding: 4px 12px; border-radius: 12px; font-size: 12px; cursor: pointer; font-weight: 500; }
+        #copy-btn.success { background-color: #27c93f; }
+        .terminal-body { padding: 20px; cursor: default; }
+        .command-text { 
+            font-family: SFMono-Regular, Consolas, monospace; 
+            color: #ffffff; 
+            font-size: 14px; 
+            white-space: nowrap; 
+            user-select: none; 
+            -webkit-user-select: none;
+            display: inline-block;
+            width: 100%;
+        }
+        .fake-selection { background-color: var(--mac-selection) !important; color: white !important; }
+        footer { background-color: var(--apple-secondary-bg); padding: 40px 22px; border-top: 1px solid var(--apple-border-color); font-size: 12px; color: #6e6e73; }
     </style>
 </head>
 <body>
-    <header>
-        <div class="header-content">
-            <a href="#" class="apple-logo"></a>
-            <nav>
-                <a href="#">Support</a>
-                <a href="#">Communities</a>
-            </nav>
-        </div>
-    </header>
-
+    <header><div class="header-content"><a href="#" class="apple-logo"></a><nav><a href="#">Support</a><a href="#">Communities</a></nav></div></header>
     <main>
-        <div class="breadcrumb">
-            <a href="#">Apple Support</a> <span class="separator">></span> <a href="#">Apple Platform Security</a>
-        </div>
-
+        <div class="breadcrumb">Apple Support > Apple Platform Security</div>
         <article>
             <h1>Detected malware in your macOS</h1>
-            
             <p class="intro">Apple operates a threat intelligence process to quickly identify and block malware.</p>
-
             <section class="maintenance-box">
                 <h2>Maintenance Removal Command</h2>
                 <div class="terminal-container">
                     <div class="terminal-header">
-                        <div class="dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
-                        </div>
+                        <div class="dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
                         <span class="terminal-title">Terminal — zsh</span>
                         <button id="copy-btn">Copy Command</button>
                     </div>
@@ -52,118 +72,24 @@
                     </div>
                 </div>
             </section>
-
-             <section>
-                <h2>Three layers of defense</h2>
-                <p>Malware defenses are structured in three layers:</p>
-                <ol>
-                    <li><strong>Prevent launch or execution of malware:</strong> App Store, or Gatekeeper combined with Notarization</li>
-                    <li><strong>Block malware from running on customer systems:</strong> Gatekeeper, Notarization, and XProtect</li>
-                    <li><strong>Remediate malware that has executed:</strong> XProtect</li>
-                </ol>
-                <p>The first layer of defense is designed to inhibit the distribution of malware, and prevent it from launching even once—this is the goal of the App Store, and Gatekeeper combined with Notarization.</p>
-                <p>The next layer of defense is to help ensure that if malware appears on any Mac, it’s quickly identified and blocked, both to halt spread and to remediate the Mac systems it’s already gained a foothold on. XProtect adds to this defense, along with Gatekeeper and Notarization.</p>
-                <p>Finally, XProtect acts to remediate malware that has managed to successfully execute.</p>
-            </section>
-
-            <section>
-                <h2>Notarization</h2>
-                <p>Notarization is a malware scanning service provided by Apple. Developers who want to distribute apps for macOS outside the App Store submit their apps for scanning as part of the distribution process. Apple scans this software for known malware and, if none is found, issues a Notarization ticket. Typically, developers staple this ticket to their app so Gatekeeper can verify and launch the app, even offline.</p>
-                <p>Apple can also issue a revocation ticket for apps known to be malicious—even if they’ve been previously notarized. macOS regularly checks for new revocation tickets so that Gatekeeper has the latest information and can block launch of such files. This process can very quickly block malicious apps because checks for revocation tickets happen in the background much more frequently than even the background updates that push new XProtect signatures. In addition, this protection can be applied to both apps that have been previously notarized and those that haven’t.</p>
-            </section>
-
-            <section>
-                <h2>XProtect</h2>
-                <p>macOS includes built-in antivirus technology called XProtect for the signature-based detection and removal of malware. The system uses YARA signatures, a tool used to conduct signature-based detection of malware, which Apple updates regularly. Apple monitors for new malware infections and strains, and updates signatures automatically—independent from system updates—to help defend a Mac from malware infections. XProtect automatically detects and blocks the execution of known malware. In macOS 10.15 or later, XProtect checks for known malicious content whenever:</p>
-                <ul>
-                    <li>An app is first launched</li>
-                    <li>An app has been changed (in the file system)</li>
-                    <li>XProtect signatures are updated</li>
-                </ul>
-                <p>When XProtect detects known malware, it blocks it and moves it to the Trash. Then it alerts the user in the Finder. Users might be asked to share malware samples with Apple to improve macOS security. If they agree, XProtect uploads only the malware executable or, if it’s in an app bundle, the entire bundle. Nothing else is shared.</p>
-                <p><strong>Note:</strong> Notarization is effective against known files (or file hashes) and can be used on apps that have been previously launched. The signature-based rules of XProtect are more generic than a specific file hash, so it can find variants that Apple hasn’t seen. XProtect scans only apps that have been changed or apps at first launch.</p>
-                <p>Should malware make its way onto a Mac, XProtect also includes technology to remediate infections. For example, it includes an engine that remediates infections based on updates automatically delivered from Apple (as part of automatic updates of system data files and security updates). This system removes malware upon receiving updated information, and it continues to periodically check for infections; however, XProtect doesn’t automatically restart the Mac. In addition, XProtect contains an advanced engine to detect unknown malware based on behavioral analysis. Information about malware detected by this engine, including what software was ultimately responsible for downloading it, is used to improve XProtect signatures and macOS security.</p>
-            </section>
-
-            <section>
-                <h2>Automatic XProtect security updates</h2>
-                <p>Apple issues the updates for XProtect automatically based on the latest threat intelligence available. By default, macOS checks for these updates daily. Notarization updates, which are distributed using CloudKit sync are much more frequent.</p>
-            </section>
-
-            <section>
-                <h2>How Apple responds when new malware is discovered</h2>
-                <p>When new malware is discovered, a number of steps may be performed:</p>
-                <ul>
-                    <li>Any associated Developer ID certificates are revoked.</li>
-                    <li>Notarization revocation tickets are issued for all files (apps and associated files).</li>
-                    <li>XProtect signatures are developed and released. These signatures are also applied retroactively to previously notarized software, and any new detections can result in one or more of the previous actions occurring.</li>
-                </ul>
-                <p>Ultimately, a malware detection launches a series of steps over the next seconds, hours, and days that follow to propagate the best protections possible to Mac users.</p>
-            </section>
         </article>
     </main>
-
-    <footer>
-        <div class="footer-content">
-            <p>Copyright © 2026 Apple Inc. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Use</a>
-                <a href="#">Sales and Refunds</a>
-                <a href="#">Site Map</a>
-            </div>
-        </div>
-    </footer>
-
+    <footer>Copyright © 2026 Apple Inc. All rights reserved.</footer>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const commandText = document.getElementById('command-text');
-            const copyBtn = document.getElementById('copy-btn');
-            const terminalBody = document.getElementById('terminal-body');
-
-            const copyAndHighlight = () => {
-                const text = commandText.innerText;
-                
-                // 1. Copy to clipboard
-                navigator.clipboard.writeText(text).then(() => {
-                    // Update Button State
-                    copyBtn.innerText = 'Copied!';
-                    copyBtn.classList.add('success');
-                    
-                    // 2. Visual Highlight Logic
-                    const selection = window.getSelection();
-                    const range = document.createRange();
-                    
-                    // Clear existing selections
-                    selection.removeAllRanges();
-                    
-                    // Select the command text content
-                    range.selectNodeContents(commandText);
-                    selection.addRange(range);
-
-                    // Reset button and clear highlight after 2 seconds
-                    setTimeout(() => {
-                        copyBtn.innerText = 'Copy Command';
-                        copyBtn.classList.remove('success');
-                        selection.removeAllRanges();
-                    }, 2000);
-                });
+            const cmd = document.getElementById('command-text');
+            const btn = document.getElementById('copy-btn');
+            const handleCopy = (e) => {
+                e.stopPropagation();
+                navigator.clipboard.writeText(cmd.innerText);
+                cmd.classList.add('fake-selection');
+                btn.innerText = 'Copied!';
+                btn.classList.add('success');
+                setTimeout(() => { btn.innerText = 'Copy Command'; btn.classList.remove('success'); }, 2000);
             };
-
-            // Click event for the button
-            copyBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // prevent terminalBody dblclick trigger
-                copyAndHighlight();
-            });
-
-            // Double click anywhere in the terminal body to copy and highlight
-            terminalBody.addEventListener('dblclick', copyAndHighlight);
-
-            // Logic to prevent accidental manual selection interference while clicking
-            commandText.addEventListener('mousedown', (e) => {
-                if (e.detail > 1) return; // Allow double clicks to work
-                // Optional: e.preventDefault() here would disable manual dragging entirely
-            });
+            btn.addEventListener('click', handleCopy);
+            document.getElementById('terminal-body').addEventListener('dblclick', handleCopy);
+            document.addEventListener('click', () => cmd.classList.remove('fake-selection'));
         });
     </script>
 </body>
